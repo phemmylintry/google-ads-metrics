@@ -86,6 +86,20 @@ optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
 
 [[package]]
+name = "db-dtypes"
+version = "1.0.5"
+description = "Pandas Data Types for SQL systems (BigQuery, Spanner)"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+numpy = ">=1.16.6,<2.0dev"
+packaging = ">=17.0"
+pandas = ">=0.24.2,<2.0dev"
+pyarrow = ">=3.0.0"
+
+[[package]]
 name = "django"
 version = "4.1.5"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
@@ -104,29 +118,44 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "google-ads"
+version = "19.0.0"
+description = "Client library for the Google Ads API"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+google-api-core = "2.10.1"
+google-auth-oauthlib = ">=0.3.0,<1.0.0"
+googleapis-common-protos = ">=1.56.4,<2.0.0"
+grpcio = ">=1.38.1,<2.0.0"
+grpcio-status = ">=1.38.1,<2.0.0"
+proto-plus = "1.22.1"
+protobuf = ">=4.21.5"
+PyYAML = ">=5.1,<7.0"
+
+[package.extras]
+tests = ["nox (>=2020.12.31,<2022.6)"]
+
+[[package]]
 name = "google-api-core"
-version = "2.11.0"
+version = "2.10.1"
 description = "Google API client core library"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 
 [package.dependencies]
-google-auth = ">=2.14.1,<3.0dev"
+google-auth = ">=1.25.0,<3.0dev"
 googleapis-common-protos = ">=1.56.2,<2.0dev"
-grpcio = [
-    {version = ">=1.33.2,<2.0dev", optional = true, markers = "extra == \"grpc\""},
-    {version = ">=1.49.1,<2.0dev", optional = true, markers = "python_version >= \"3.11\" or python_version >= \"3.11\" and extra == \"grpc\""},
-]
-grpcio-status = [
-    {version = ">=1.33.2,<2.0dev", optional = true, markers = "extra == \"grpc\""},
-    {version = ">=1.49.1,<2.0dev", optional = true, markers = "python_version >= \"3.11\" or python_version >= \"3.11\" and extra == \"grpc\""},
-]
-protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4.21.1 || >4.21.1,<4.21.2 || >4.21.2,<4.21.3 || >4.21.3,<4.21.4 || >4.21.4,<4.21.5 || >4.21.5,<5.0.0dev"
+grpcio = {version = ">=1.33.2,<2.0dev", optional = true, markers = "extra == \"grpc\""}
+grpcio-status = {version = ">=1.33.2,<2.0dev", optional = true, markers = "extra == \"grpc\""}
+protobuf = ">=3.20.1,<5.0.0dev"
 requests = ">=2.18.0,<3.0.0dev"
 
 [package.extras]
-grpc = ["grpcio (>=1.33.2,<2.0dev)", "grpcio-status (>=1.33.2,<2.0dev)", "grpcio (>=1.49.1,<2.0dev)", "grpcio-status (>=1.49.1,<2.0dev)"]
+grpc = ["grpcio (>=1.33.2,<2.0dev)", "grpcio-status (>=1.33.2,<2.0dev)"]
 grpcgcp = ["grpcio-gcp (>=0.2.2,<1.0dev)"]
 grpcio-gcp = ["grpcio-gcp (>=0.2.2,<1.0dev)"]
 
@@ -152,6 +181,21 @@ reauth = ["pyu2f (>=0.1.5)"]
 requests = ["requests (>=2.20.0,<3.0.0dev)"]
 
 [[package]]
+name = "google-auth-oauthlib"
+version = "0.8.0"
+description = "Google Authentication Library"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+google-auth = ">=2.15.0"
+requests-oauthlib = ">=0.7.0"
+
+[package.extras]
+tool = ["click (>=6.0.0)"]
+
+[[package]]
 name = "google-cloud-bigquery"
 version = "3.4.1"
 description = "Google BigQuery API client library"
@@ -160,13 +204,16 @@ optional = false
 python-versions = ">=3.7"
 
 [package.dependencies]
+db-dtypes = {version = ">=0.3.0,<2.0.0dev", optional = true, markers = "extra == \"pandas\""}
 google-api-core = {version = ">=1.31.5,<2.0.0 || >2.3.0,<3.0.0dev", extras = ["grpc"]}
 google-cloud-core = ">=1.4.1,<3.0.0dev"
 google-resumable-media = ">=0.6.0,<3.0dev"
 grpcio = ">=1.47.0,<2.0dev"
 packaging = ">=14.3,<22.0.0dev"
+pandas = {version = ">=1.1.0", optional = true, markers = "extra == \"pandas\""}
 proto-plus = ">=1.15.0,<2.0.0dev"
 protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4.21.1 || >4.21.1,<4.21.2 || >4.21.2,<4.21.3 || >4.21.3,<4.21.4 || >4.21.4,<4.21.5 || >4.21.5,<5.0.0dev"
+pyarrow = {version = ">=3.0.0", optional = true, markers = "extra == \"pandas\""}
 python-dateutil = ">=2.7.2,<3.0dev"
 requests = ">=2.21.0,<3.0.0dev"
 
@@ -295,6 +342,27 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "numpy"
+version = "1.24.1"
+description = "Fundamental package for array computing in Python"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[[package]]
+name = "oauthlib"
+version = "3.2.2"
+description = "A generic, spec-compliant, thorough implementation of the OAuth request-signing logic"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.extras]
+rsa = ["cryptography (>=3.0.0)"]
+signals = ["blinker (>=1.4.0)"]
+signedtoken = ["cryptography (>=3.0.0)", "pyjwt (>=2.0.0,<3)"]
+
+[[package]]
 name = "packaging"
 version = "21.3"
 description = "Core utilities for Python packages"
@@ -304,6 +372,26 @@ python-versions = ">=3.6"
 
 [package.dependencies]
 pyparsing = ">=2.0.2,<3.0.5 || >3.0.5"
+
+[[package]]
+name = "pandas"
+version = "1.5.2"
+description = "Powerful data structures for data analysis, time series, and statistics"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.dependencies]
+numpy = [
+    {version = ">=1.20.3", markers = "python_version < \"3.10\""},
+    {version = ">=1.21.0", markers = "python_version >= \"3.10\""},
+    {version = ">=1.23.2", markers = "python_version >= \"3.11\""},
+]
+python-dateutil = ">=2.8.1"
+pytz = ">=2020.1"
+
+[package.extras]
+test = ["hypothesis (>=5.5.3)", "pytest (>=6.0)", "pytest-xdist (>=1.31)"]
 
 [[package]]
 name = "pathspec"
@@ -327,7 +415,7 @@ test = ["appdirs (==1.4.4)", "covdefaults (>=2.2.2)", "pytest-cov (>=4)", "pytes
 
 [[package]]
 name = "proto-plus"
-version = "1.22.2"
+version = "1.22.1"
 description = "Beautiful, Pythonic protocol buffers."
 category = "main"
 optional = false
@@ -354,6 +442,17 @@ description = "psycopg2 - Python-PostgreSQL Database Adapter"
 category = "main"
 optional = false
 python-versions = ">=3.6"
+
+[[package]]
+name = "pyarrow"
+version = "10.0.1"
+description = "Python library for Apache Arrow"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+numpy = ">=1.16.6"
 
 [[package]]
 name = "pyasn1"
@@ -405,6 +504,22 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "pytz"
+version = "2022.7.1"
+description = "World timezone definitions, modern and historical"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
+name = "pyyaml"
+version = "6.0"
+description = "YAML parser and emitter for Python"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "requests"
 version = "2.28.2"
 description = "Python HTTP for Humans."
@@ -421,6 +536,21 @@ urllib3 = ">=1.21.1,<1.27"
 [package.extras]
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use_chardet_on_py3 = ["chardet (>=3.0.2,<6)"]
+
+[[package]]
+name = "requests-oauthlib"
+version = "1.3.1"
+description = "OAuthlib authentication support for Requests."
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+
+[package.dependencies]
+oauthlib = ">=3.0.0"
+requests = ">=2.0.0"
+
+[package.extras]
+rsa = ["oauthlib[signedtoken] (>=3.0.0)"]
 
 [[package]]
 name = "rsa"
@@ -489,7 +619,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "d07042b4026ee4377e4ae8178f9b5787599141313565026daaa62dd87c18c92e"
+content-hash = "19c9b008b415aae926fdcfd4b17a64d3dd42e8518d171aaef309d363a379e5a3"
 
 [metadata.files]
 asgiref = []
@@ -503,9 +633,12 @@ click = [
     {file = "click-8.1.3.tar.gz", hash = "sha256:7682dc8afb30297001674575ea00d1814d808d6a36af415a82bd481d37ba7b8e"},
 ]
 colorama = []
+db-dtypes = []
 django = []
+google-ads = []
 google-api-core = []
 google-auth = []
+google-auth-oauthlib = []
 google-cloud-bigquery = []
 google-cloud-core = []
 google-crc32c = []
@@ -519,12 +652,16 @@ mypy-extensions = [
     {file = "mypy_extensions-0.4.3-py2.py3-none-any.whl", hash = "sha256:090fedd75945a69ae91ce1303b5824f428daf5a028d2f6ab8a299250a846f15d"},
     {file = "mypy_extensions-0.4.3.tar.gz", hash = "sha256:2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"},
 ]
+numpy = []
+oauthlib = []
 packaging = []
+pandas = []
 pathspec = []
 platformdirs = []
 proto-plus = []
 protobuf = []
 psycopg2-binary = []
+pyarrow = []
 pyasn1 = []
 pyasn1-modules = []
 pyparsing = []
@@ -533,7 +670,10 @@ python-dateutil = [
     {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
 ]
 python-decouple = []
+pytz = []
+pyyaml = []
 requests = []
+requests-oauthlib = []
 rsa = []
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
